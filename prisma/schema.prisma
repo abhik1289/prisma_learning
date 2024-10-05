@@ -19,5 +19,7 @@ model User {
   name        String
   phoneNumber String?
   password    String
+  role        String
+  age         Int
   isActive    Boolean @default(false)
 }
