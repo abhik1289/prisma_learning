@@ -42,12 +42,9 @@ router.post("/add-user", async (req: Request, res: Response) => {
 //find unique
 router.get("/get-user/:email", async (req, res) => {
   const user = await prisma.user.findUnique({
+   
     where: {
       email: req.params.email,
-    },
-    select: {
-      email: true,
-      name: true,
     },
   });
   res.json({ user });
@@ -68,6 +65,7 @@ router.get("/find-first", async (req, res) => {
         gt: 50,
       },
     },
+
     orderBy: {
       id: "desc",
     },

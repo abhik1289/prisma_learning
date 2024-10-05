@@ -41,10 +41,6 @@ router.get("/get-user/:email", async (req, res) => {
         where: {
             email: req.params.email,
         },
-        select: {
-            email: true,
-            name: true,
-        },
     });
     res.json({ user });
 });
