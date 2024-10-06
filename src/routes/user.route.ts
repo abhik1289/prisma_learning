@@ -207,4 +207,43 @@ router.post("/create-post", async (req: Request, res: Response) => {
   res.json({ createdPost });
 });
 
+// complex data fetching
+
+// router.get("/get-data-1/:email", async (req, res) => {
+//   try {
+//     const data = await prisma.user.findUnique({
+//       where: {
+//         email: req.params.email,
+//       },
+//       select: {
+//         name: true,
+//         email: true,
+//         age: true,
+//         posts: {
+//           select: {
+//             title: true,
+//           },
+//         },
+//       },
+//     });
+//     res.json({ data });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
+router.get("/get-data-1/:email", async (req, res) => {
+  try {
+    const data = await prisma.user.findMany({
+      // relationLoadStrategy: "join", // or 'query'
+      select: {
+        posts: true,
+      },
+    });
+    res.json({ data });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 export default router;
