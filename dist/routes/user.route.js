@@ -124,4 +124,63 @@ router.put("/update-upsert/:email", async (req, res) => {
     });
     res.json({ updateUser });
 });
+router.post("/create-post", async (req, res) => {
+    const postData = {
+        id: "60d5ec49e0f4a531f8e4f1f3", // This is auto-generated and usually you don't set it manually
+        title: "Exploring the Mountains",
+        postType: "Green",
+        photo: {
+            create: {
+                height: 300,
+                width: 400,
+                url: "https://example.com/photo1.jpg",
+            },
+        },
+        userId: "6701947f535bc9efc2030227", // Replace with actual User ID
+    };
+    const createdPost = await prisma.user.create({
+        include: {
+            posts: true,
+        },
+        data: {
+            name: "Avik", // use the values from the request body
+            email: "abxc@example.com",
+            password: "password",
+            role: "admin",
+            age: 12,
+            isActive: false,
+            phoneNumber: "9876453432", //
+            posts: {
+                create: [
+                    {
+                        title: "Title 10",
+                        postType: "Green",
+                        photos: {
+                            height: 250,
+                            width: 350,
+                            url: "https://example.com/photo3.jpg",
+                        },
+                        // userId: "6701947f535bc9efc2030227",
+                    },
+                    {
+                        title: "Title 20",
+                        postType: "Red",
+                        // userId: "6701947f535bc9efc2030227",
+                    },
+                    {
+                        title: "Title 30",
+                        postType: "Blue",
+                        // userId: "6701947f535bc9efc2030227",
+                    },
+                    {
+                        title: "Title 40",
+                        postType: "Green",
+                        // userId: "6701947f535bc9efc2030227",
+                    },
+                ],
+            },
+        },
+    });
+    console.log(`Post created: `, createdPost);
+});
 export default router;
