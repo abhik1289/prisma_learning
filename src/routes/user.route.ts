@@ -1,6 +1,7 @@
 // src/routes/user.routes.ts
 import express, { Request, Response, Router } from "express";
 import { PrismaClient } from "@prisma/client";
+// import { postType } from "./../../node_modules/.prisma/client/index.d";
 
 const prisma = new PrismaClient();
 const router: Router = express.Router();
@@ -8,7 +9,16 @@ const router: Router = express.Router();
 //create user
 router.post("/add-user", async (req: Request, res: Response) => {
   console.log("first");
-  const { name, email, password, phoneNumber, role, age, isActive } = req.body;
+  const {
+    name,
+    email,
+    password,
+    phoneNumber,
+    role,
+    age,
+    isActive,
+    extendedPetsData,
+  } = req.body;
 
   try {
     // Create a new user with the provided data
@@ -20,6 +30,7 @@ router.post("/add-user", async (req: Request, res: Response) => {
         role,
         age,
         isActive,
+        extendedPetsData,
         phoneNumber, // optional if not defined in your schema
       },
     });
@@ -235,10 +246,7 @@ router.post("/create-post", async (req: Request, res: Response) => {
 router.get("/get-data-1/:email", async (req, res) => {
   try {
     const data = await prisma.user.findMany({
-      // relationLoadStrategy: "join", // or 'query'
-      select: {
-        posts: true,
-      },
+      include: { posts: true },
     });
     res.json({ data });
   } catch (error) {

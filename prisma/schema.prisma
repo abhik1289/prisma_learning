@@ -15,15 +15,16 @@ datasource db {
 }
 
 model User {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
-  email       String  @unique
-  name        String
-  phoneNumber String?
-  password    String
-  role        String
-  age         Int
-  isActive    Boolean @default(false)
-  posts       Post[]
+  id               String  @id @default(auto()) @map("_id") @db.ObjectId
+  email            String  @unique
+  name             String
+  phoneNumber      String?
+  password         String
+  role             String
+  age              Int
+  isActive         Boolean @default(false)
+  posts            Post[]
+  extendedPetsData Json?
 }
 
 model Post {
