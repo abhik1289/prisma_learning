@@ -154,13 +154,11 @@ router.post("/create-post", async (req: Request, res: Response) => {
   };
   const createdPost = await prisma.user.create({
     include: {
-      posts: {
-        
-      },
+      posts: true,
     },
     data: {
       name: "Avik", // use the values from the request body
-      email: "abxc@example.com",
+      email: "acb78xc@example.com",
       password: "password",
       role: "admin",
       age: 12,
@@ -206,6 +204,7 @@ router.post("/create-post", async (req: Request, res: Response) => {
     },
   });
   console.log(`Post created: `, createdPost);
+  res.json({ createdPost });
 });
 
 export default router;

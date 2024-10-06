@@ -144,7 +144,7 @@ router.post("/create-post", async (req, res) => {
         },
         data: {
             name: "Avik", // use the values from the request body
-            email: "abxc@example.com",
+            email: "acb78xc@example.com",
             password: "password",
             role: "admin",
             age: 12,
@@ -155,11 +155,18 @@ router.post("/create-post", async (req, res) => {
                     {
                         title: "Title 10",
                         postType: "Green",
-                        photos: {
-                            height: 250,
-                            width: 350,
-                            url: "https://example.com/photo3.jpg",
-                        },
+                        photos: [
+                            {
+                                height: 300,
+                                width: 400,
+                                url: "https://example.com/photo1.jpg",
+                            },
+                            {
+                                height: 300,
+                                width: 400,
+                                url: "https://example.com/photo2.jpg",
+                            },
+                        ],
                         // userId: "6701947f535bc9efc2030227",
                     },
                     {
@@ -182,5 +189,6 @@ router.post("/create-post", async (req, res) => {
         },
     });
     console.log(`Post created: `, createdPost);
+    res.json({ createdPost });
 });
 export default router;
